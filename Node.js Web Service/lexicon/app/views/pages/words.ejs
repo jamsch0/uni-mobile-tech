@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Lexicon - Words</title>
+        <%- include ../partials/head %>
+        <script>
+            function addWord() {
+                let data = { slug: document.getElementById("slug").value, translations: [] };
+
+                for (const translation of document.getElementsByClassName("lang")) {
+                    data.translations.push({ language: translation.id, text: translation.value });
+                }
+
+                sendRequest("/api/words", "POST", data, () => document.location.reload());
+            }
+
+            function deleteWord() {
+                const word = document.querySelector('input[name="word"]:checked');
+
+                if (word) {
+                    sendRequest(`/api/words/${word.id}`, "DELETE", null, () => document.location.reload());
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Lexicon - Words</h1>
+        <a href="/web/">Back</a>
+        <form>
+            <input type="text" id="slug" placeholder="word">
+            <% for (const lang of langs) { %>
+                <input type="text" class="lang" id="<%= lang._id %>" placeholder="<%= lang.isoCode %>">
+            <% } %>
+            <button type="button" onclick="addWord()">Add New</button>
+        </form>
+        <table>
+            <tr>
+                <th colspan="2" rowspan="2">Word</th>
+                <th colspan="<%= langs.length %>">Translations</th>
+            </tr>
+            <tr>
+                <% for (const lang of langs) { %>
+                    <th><%= lang.isoCode %></th>
+                <% } %>
+            </tr>
+            <% for (const word of words) { %>
+                <tr>
+                    <td><input type="radio" name="word" id="<%= word.slug %>"></td>
+                    <td><%= word.slug %></td>
+                    <% for (const translation of word.translations) { %>
+                        <td><%= translation.text %></td>
+                    <% } %>
+                </tr>
+            <% } %>
+        </table>
+        <button type="button" onclick="deleteWord()">Delete Selected</button>
+    </body>
+</html>

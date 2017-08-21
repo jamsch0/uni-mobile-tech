@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Lexicon</title>
+        <%- include ../partials/head %>
+        <script>
+            function logout() {
+                // Set cookie expiry to epoch to delete it
+                document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/web/";
+                document.location.href = "/web/login";
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Lexicon</h1>
+        <a href="/web/words">Words</a>
+        <a href="/web/tests">Tests</a>
+        <br>
+        <button type="button" onclick="logout()">Logout</button>
+    </body>
+</html>

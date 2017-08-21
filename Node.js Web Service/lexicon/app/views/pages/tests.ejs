@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Lexicon - Tests</title>
+        <%- include ../partials/head %>
+    </head>
+    <body>
+        <h1>Lexicon - Tests</h1>
+        <a href="/web/">Back</a>
+        <table>
+            <tr>
+                <th rowspan="2">Completed</th>
+                <th colspan="2">Languages</th>
+                <th rowspan="2">Correct</th>
+                <th colspan="3">Questions</th>
+            </tr>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Prompt</th>
+                <th>Answer</th>
+                <th>Response</th>
+            </tr>
+            <% for (const test of tests) { %>
+                <tr>
+                    <td rowspan="<%= test.questions.length %>"><%= test.completed %></td>
+                    <td rowspan="<%= test.questions.length %>"><%= test.langFrom.isoCode %></td>
+                    <td rowspan="<%= test.questions.length %>"><%= test.langTo.isoCode %></td>
+                    <td rowspan="<%= test.questions.length %>">
+                        <%= test.questions.filter(q =>
+                                q.response && q.response.toLowerCase() === q.word.translations.find(t =>
+                                    t.language.isoCode === test.langTo.isoCode).text.toLowerCase()).length %>
+                        / <%= test.questions.length %>
+                    </td>
+                    <td><%= test.questions[0].word.translations.find(t => t.language.isoCode === test.langFrom.isoCode).text %></td>
+                    <td><%= test.questions[0].word.translations.find(t => t.language.isoCode === test.langTo.isoCode).text %></td>
+                    <td><%= test.questions[0].response %>&nbsp;</td>
+                </tr>
+                <% for (const question of test.questions.slice(1, test.questions.length)) { %>
+                    <tr>
+                        <td><%= question.word.translations.find(t => t.language.isoCode === test.langFrom.isoCode).text %></td>
+                        <td><%= question.word.translations.find(t => t.language.isoCode === test.langTo.isoCode).text %></td>
+                        <td><%= question.response %>&nbsp;</td>
+                    </tr>
+                <% } %>
+            <% } %>
+        </table>
+    </body>
+</html>

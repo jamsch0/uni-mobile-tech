@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G31" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName="CategoryMO" syncable="YES" codeGenerationType="class">
+        <relationship name="name" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" syncable="YES"/>
+        <relationship name="words" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Word" inverseName="category" inverseEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="Language" representedClassName="LanguageMO" syncable="YES" codeGenerationType="class">
+        <attribute name="isoCode" attributeType="String" minValueString="2" maxValueString="2" indexed="YES" syncable="YES"/>
+        <attribute name="nameSlug" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Question" representedClassName="QuestionMO" syncable="YES" codeGenerationType="class">
+        <attribute name="response" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="test" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Test" inverseName="questions" inverseEntity="Test" syncable="YES"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="Test" representedClassName="TestMO" syncable="YES" codeGenerationType="class">
+        <attribute name="completed" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="langFrom" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" syncable="YES"/>
+        <relationship name="langTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" syncable="YES"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="test" inverseEntity="Question" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="tests" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Translation" representedClassName="TranslationMO" syncable="YES" codeGenerationType="class">
+        <attribute name="languageIsoCode" attributeType="String" syncable="YES"/>
+        <attribute name="rating" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text" attributeType="String" syncable="YES"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="translations" inverseEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="UserMO" syncable="YES" codeGenerationType="class">
+        <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="username" attributeType="String" syncable="YES"/>
+        <relationship name="langFrom" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" syncable="YES"/>
+        <relationship name="langTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" syncable="YES"/>
+        <relationship name="tests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Test" inverseName="user" inverseEntity="Test" syncable="YES"/>
+    </entity>
+    <entity name="Word" representedClassName="WordMO" syncable="YES" codeGenerationType="class">
+        <attribute name="slug" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="words" inverseEntity="Category" syncable="YES"/>
+        <relationship name="translations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Translation" inverseName="word" inverseEntity="Translation" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="-900" positionY="36" width="128" height="75"/>
+        <element name="Language" positionX="-416" positionY="-234" width="128" height="75"/>
+        <element name="Question" positionX="-740" positionY="-187" width="128" height="90"/>
+        <element name="Test" positionX="-524" positionY="-432" width="128" height="150"/>
+        <element name="Translation" positionX="-135" positionY="-162" width="128" height="105"/>
+        <element name="Word" positionX="-567" positionY="45" width="135" height="90"/>
+        <element name="User" positionX="-702" positionY="-288" width="128" height="120"/>
+    </elements>
+</model>

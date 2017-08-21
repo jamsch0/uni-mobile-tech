@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G1108" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName=".Category" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="name" maxCount="1" deletionRule="Nullify" destinationEntity="Word" syncable="YES"/>
+        <relationship name="wordsSet" toMany="YES" deletionRule="Nullify" destinationEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="Language" representedClassName=".Language" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="isoCode" attributeType="String" minValueString="2" maxValueString="2" indexed="YES" syncable="YES"/>
+        <attribute name="nameSlug" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Question" representedClassName=".Question" syncable="YES">
+        <attribute name="response" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="test" maxCount="1" deletionRule="Nullify" destinationEntity="Test" inverseName="questionsSet" inverseEntity="Test" syncable="YES"/>
+        <relationship name="word" maxCount="1" deletionRule="Nullify" destinationEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="Test" representedClassName=".Test" syncable="YES">
+        <attribute name="completed" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="markedForDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="markedForSync" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userId" attributeType="String" syncable="YES"/>
+        <relationship name="langFrom" maxCount="1" deletionRule="Nullify" destinationEntity="Language" syncable="YES"/>
+        <relationship name="langTo" maxCount="1" deletionRule="Nullify" destinationEntity="Language" syncable="YES"/>
+        <relationship name="questionsSet" toMany="YES" deletionRule="Cascade" destinationEntity="Question" inverseName="test" inverseEntity="Question" syncable="YES"/>
+    </entity>
+    <entity name="Translation" representedClassName=".Translation" syncable="YES">
+        <attribute name="rating" attributeType="Integer 64" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text" attributeType="String" syncable="YES"/>
+        <relationship name="language" maxCount="1" deletionRule="Nullify" destinationEntity="Language" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="username" attributeType="String" syncable="YES"/>
+        <relationship name="langFrom" maxCount="1" deletionRule="Nullify" destinationEntity="Language" syncable="YES"/>
+        <relationship name="langTo" maxCount="1" deletionRule="Nullify" destinationEntity="Language" syncable="YES"/>
+    </entity>
+    <entity name="Word" representedClassName=".Word" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="slug" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="translationsSet" toMany="YES" deletionRule="Cascade" destinationEntity="Translation" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="-333" positionY="339" width="128" height="90"/>
+        <element name="Language" positionX="-261" positionY="438" width="128" height="90"/>
+        <element name="Question" positionX="-468" positionY="63" width="128" height="90"/>
+        <element name="Test" positionX="115" positionY="144" width="128" height="180"/>
+        <element name="Translation" positionX="-630" positionY="282" width="128" height="90"/>
+        <element name="User" positionX="70" positionY="372" width="128" height="120"/>
+        <element name="Word" positionX="-315" positionY="189" width="128" height="90"/>
+    </elements>
+</model>

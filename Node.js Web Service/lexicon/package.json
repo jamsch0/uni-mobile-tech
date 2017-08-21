@@ -1,0 +1,26 @@
+{
+  "name": "lexicon",
+  "version": "0.1.0",
+  "main": "server.js",
+  "author": "James Chapman",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-as-promised": "^1.1.0",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "http-status": "^0.2.3",
+    "jsonwebtoken": "^7.1.9",
+    "mongoose": "^4.6.6",
+    "mongoose-autopopulate": "^0.5.0",
+    "mongoose-integer": "^0.1.1",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "serve-index": "^1.8.0"
+  },
+  "engines": {
+    "node": "~7.2.0"
+  }
+}

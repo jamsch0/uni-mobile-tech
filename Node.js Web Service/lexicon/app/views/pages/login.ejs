@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Lexicon - Login</title>
+        <%- include ../partials/head %>
+        <script>
+            function getCredentials() {
+                return {
+                    name: document.getElementById("username").value,
+                    password: document.getElementById("password").value
+                };
+            }
+
+            function login() {
+                sendRequest("/api/login", "POST", getCredentials(), response => {
+                    document.cookie = `jwt=${response.token}; path=/web/`;
+                    document.location.href = "/web/";
+                });
+            }
+
+            function register() {
+                sendRequest("/api/users", "POST", getCredentials(), response => {
+                    login();
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Lexicon - Login</h1>
+        <form>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button type="button" onclick="login()">Login</button>
+            <button type="button" onclick="register()">Register</button>
+        </form>
+    </body>
+</html>

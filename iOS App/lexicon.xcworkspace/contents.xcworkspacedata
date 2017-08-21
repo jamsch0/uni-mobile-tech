@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:lexicon/lexicon.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:PromiseKit-4.1.8/PromiseKit.xcodeproj">
+   </FileRef>
+</Workspace>
