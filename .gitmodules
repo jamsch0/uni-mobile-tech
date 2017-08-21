@@ -1,0 +1,3 @@
+[submodule "iOS App/PromiseKit-4.1.8"]
+	path = iOS App/PromiseKit-4.1.8
+	url = https://github.com/mxcl/PromiseKit
